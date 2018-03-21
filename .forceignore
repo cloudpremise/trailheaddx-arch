@@ -3,3 +3,7 @@
 #
 
 package.xml
+src/main/default/profiles/Admin.profile-meta.xml
+Admin.profile
+Trial_Customer_Portal_User.profile
+**.profile
