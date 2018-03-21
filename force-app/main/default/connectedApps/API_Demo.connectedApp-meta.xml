@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>greg@cloudpremise.com</contactEmail>
+    <label>API Demo</label>
+    <oauthConfig>
+        <callbackUrl>myapp://oauth</callbackUrl>
+        <scopes>Full</scopes>
+    </oauthConfig>
+</ConnectedApp>

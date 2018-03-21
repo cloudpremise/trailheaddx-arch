@@ -1,0 +1,15 @@
+{
+    "orgName": "Vemo Enterprise Scratch Org",
+    "edition": "Enterprise",
+    "orgPreferences" : {
+        "enabled": ["S1DesktopEnabled","IsQuoteEnabled"]
+    },
+    "features": ["PersonAccounts",
+                 "ExternalSharing",
+                 "DebugApex",
+                 "CustomTabs",
+                 "CustomApps",
+                 "Communities",
+                 "AuthorApex",
+                 "API"]
+}
