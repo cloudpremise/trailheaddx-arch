@@ -4,6 +4,7 @@
     <label>Movie Magic Lightning</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
+    <tabs>Actor__c</tabs>
     <tabs>Movie__c</tabs>
     <tabs>Theater__c</tabs>
     <tabs>Box_Office_Result__c</tabs>
