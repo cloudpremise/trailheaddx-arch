@@ -53,13 +53,13 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ReadWrite</externalSharingModel>
-    <label>Movie</label>
+    <label>Theater</label>
     <nameField>
-        <displayFormat>Movie-{0}</displayFormat>
-        <label>Movie Number</label>
+        <displayFormat>Theater-{0}</displayFormat>
+        <label>Theater Number</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Movies</pluralLabel>
+    <pluralLabel>Theaters</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

@@ -52,15 +52,15 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>ReadWrite</externalSharingModel>
-    <label>Movie</label>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <label>Box Office Result</label>
     <nameField>
-        <displayFormat>Movie-{0}</displayFormat>
-        <label>Movie Number</label>
+        <displayFormat>BO-{0}</displayFormat>
+        <label>Box Office Result Number</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Movies</pluralLabel>
+    <pluralLabel>Box Office Results</pluralLabel>
     <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

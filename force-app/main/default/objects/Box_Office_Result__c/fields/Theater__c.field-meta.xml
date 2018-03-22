@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Theater__c</fullName>
+    <externalId>false</externalId>
+    <label>Theater</label>
+    <referenceTo>Theater__c</referenceTo>
+    <relationshipLabel>Box Office Results</relationshipLabel>
+    <relationshipName>Box_Office_Results</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>
