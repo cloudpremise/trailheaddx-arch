@@ -1,0 +1,953 @@
+{
+	"info": {
+		"name": "TrailheadDX Architect Bootcamp Collection",
+		"_postman_id": "fb4cd1e5-d692-d9bb-6e57-624ec2f83c90",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OAuth - User/Password Flow",
+			"description": "",
+			"item": [
+				{
+					"name": "OAuth Login (User/Password Flow)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setGlobalVariable(\"acceptableMS\", 500);\r",
+									"\r",
+									"postman.clearEnvironmentVariable(\"access_token\");\r",
+									"postman.clearEnvironmentVariable(\"pod\");\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);\r",
+									"postman.setEnvironmentVariable(\"pod\", jsonData.instance_url);\r",
+									"\r",
+									"tests[\"Body contains access_token\"] = responseBody.has(\"access_token\");\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"tests[\"token_type = Bearer\"] = jsonData.token_type === \"Bearer\";\r",
+									"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");\r",
+									"tests[\"Response time is less than 500ms\"] = responseTime < globals.acceptableMS;\r",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+									"\r",
+									"postman.clearGlobalVariable(\"acceptableMS\");\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://{{environment}}.salesforce.com/services/oauth2/token?grant_type=password&client_id={{clientID}}&client_secret={{clientSecret}}&username={{username}}&password={{password}}{{token}}",
+							"protocol": "https",
+							"host": [
+								"{{environment}}",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"services",
+								"oauth2",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"equals": true
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientID}}",
+									"equals": true
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"equals": true
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"equals": true
+								},
+								{
+									"key": "password",
+									"value": "{{password}}{{token}}",
+									"equals": true
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Box Office Results",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0dc4c4b6-ce31-482d-ba72-b08f8ad1ba28",
+								"type": "text/javascript",
+								"exec": [
+									"var i = postman.getEnvironmentVariable(\"newAuthSystemUserID\");",
+									"i++;",
+									"postman.setEnvironmentVariable(\"newAuthSystemUserID\", i);"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "33da0932-6c9a-4f68-b186-b05b88963ffa",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n    \"timeZone\": \"(GMT-7) Mountain Standard Time (America/Denver)\",\n    \"salutation\": \"Mr.\",\n    \"suffix\": \"III\",\n    \"street\": \"Street\",\n    \"state\": \"Colorado\",\n    \"ssnTaxID\": \"123456789\",\n    \"residency\": \"US Citizen\",\n    \"primarySchoolStudentID\": \"123ABC\",\n    \"primarySchoolID\": \"{{schoolID}}\",\n    \"primarySchoolGraduationDate\": \"2017-12-31\",\n    \"primarySchoolGradeLevel\": \"Freshman\",\n    \"primarySchoolEnrollmentStatus\": \"Full Time\",\n    \"primarySchoolEmail\": \"schoolemail@email.com\",\n    \"preferredMethodOfCommunication\": \"Call\",\n    \"postalCode\": \"12345\",\n    \"mobilePhone\": \"(555) 555-5555\",\n    \"middleName\": \"Middle Name\",\n    \"lastName\": \"Last Name\",\n    \"homePhone\": \"(111) 111-1111\",\n    \"firstName\": \"First Name\",\n    \"email\": \"personalemail@email.com\",\n    \"driversLicenseOrStateID\": \"Drivers License\",\n    \"doNotText\": false,\n    \"doNotEmail\": false,\n    \"doNotCall\": false,\n    \"country\": \"United States\",\n    \"city\": \"City\",\n    \"otherStreet\": \"other street\",\n    \"otherState\": \"Colorado\",\n    \"otherPostalCode\": \"12345\",\n    \"otherCountry\": \"United States\",\n    \"otherCity\": \"Denver\",\n    \"birthdate\": \"1990-01-01\",\n    \"authSystemUserID\":\"{{newAuthSystemUserID}}\",\n    \"schoolProgramOfStudyID\":\"{{schoolProgramOfStudyID}}\"\n  }\n]"
+						},
+						"url": {
+							"raw": "{{pod}}/services/apexrest/api",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"api"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Box Office Results",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0dc4c4b6-ce31-482d-ba72-b08f8ad1ba28",
+								"type": "text/javascript",
+								"exec": [
+									"var i = postman.getEnvironmentVariable(\"newAuthSystemUserID\");",
+									"i++;",
+									"postman.setEnvironmentVariable(\"newAuthSystemUserID\", i);"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "33da0932-6c9a-4f68-b186-b05b88963ffa",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"theater\": {\n            \"theaterName\": \"Denver Landmark\"\n        },\n        \"resultDate\": \"2018-03-22\",\n        \"result\": 40000.13,\n        \"movie\": {\n            \"movieName\": \"Space Saga 9\"\n        }\n    },\n        {\n        \"theater\": {\n            \"theaterName\": \"New York AMC\"\n        },\n        \"resultDate\": \"2018-03-22\",\n        \"result\": 85000.26,\n        \"movie\": {\n            \"movieName\": \"A Duane Johnson Popcorn Flick\"\n        }\n    },\n        {\n        \"theater\": {\n            \"theaterName\": \"San Fran AMC\"\n        },\n        \"resultDate\": \"2018-03-22\",\n        \"result\": 150000.40,\n        \"movie\": {\n            \"movieName\": \"Yet Another Super Hero Film\"\n        }\n    }\n]"
+						},
+						"url": {
+							"raw": "{{pod}}/services/apexrest/api",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"api"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bulk API (1.0)",
+			"description": "",
+			"item": [
+				{
+					"name": "Bulk Api Create Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.clearEnvironmentVariable(\"bulkJobID\");",
+									"var jsonObject = xml2Json(responseBody);",
+									"postman.setEnvironmentVariable(\"bulkJobID\", jsonObject.jobInfo.id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-SFDC-Session",
+								"value": "{{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n  <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\">\r\n  <operation>insert</operation>\r\n  <object>Contact</object>\r\n  <contentType>CSV</contentType>\r\n</jobInfo>\r\n"
+						},
+						"url": {
+							"raw": "{{pod}}/services/async/38.0/job",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"async",
+								"38.0",
+								"job"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Api Retrieve Job",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-SFDC-Session",
+								"value": "{{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n  <jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\">\r\n  <operation>insert</operation>\r\n  <object>Contact</object>\r\n  <contentType>CSV</contentType>\r\n</jobInfo>\r\n"
+						},
+						"url": {
+							"raw": "{{pod}}/services/async/38.0/job/{{bulkJobID}}",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"async",
+								"38.0",
+								"job",
+								"{{bulkJobID}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Api Create Batch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.clearEnvironmentVariable(\"bulkJobBatchID\");",
+									"var jsonObject = xml2Json(responseBody);",
+									"postman.setEnvironmentVariable(\"bulkJobBatchID\", jsonObject.batchInfo.id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-SFDC-Session",
+								"value": "{{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/csv"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"LastName\",\"FirstName\"\n\"Test First\",\"Test Last\""
+						},
+						"url": {
+							"raw": "{{pod}}/services/async/38.0/job/{{bulkJobID}}/batch",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"async",
+								"38.0",
+								"job",
+								"{{bulkJobID}}",
+								"batch"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Api Retrieve Batch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-SFDC-Session",
+								"value": "{{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/csv"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"LastName\"\n\"Test Bulk\""
+						},
+						"url": {
+							"raw": "{{pod}}/services/async/38.0/job/{{bulkJobID}}/batch/{{bulkJobBatchID}}",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"async",
+								"38.0",
+								"job",
+								"{{bulkJobID}}",
+								"batch",
+								"{{bulkJobBatchID}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Api Close Job",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-SFDC-Session",
+								"value": "{{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<jobInfo xmlns=\"http://www.force.com/2009/06/asyncapi/dataload\">\r\n    <state>Closed</state>\r\n</jobInfo>\r\n"
+						},
+						"url": {
+							"raw": "{{pod}}/services/async/38.0/job/{{bulkJobID}}",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"async",
+								"38.0",
+								"job",
+								"{{bulkJobID}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Api Retrieve Batch Retrieve Request",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-SFDC-Session",
+								"value": "{{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"LastName\"\n\"Test Bulk\""
+						},
+						"url": {
+							"raw": "{{pod}}/services/async/38.0/job/{{bulkJobID}}/batch/{{bulkJobBatchID}}/request",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"async",
+								"38.0",
+								"job",
+								"{{bulkJobID}}",
+								"batch",
+								"{{bulkJobBatchID}}",
+								"request"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Api Retrieve Batch Retrieve Results",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-SFDC-Session",
+								"value": "{{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"LastName\"\n\"Test Bulk\""
+						},
+						"url": {
+							"raw": "{{pod}}/services/async/38.0/job/{{bulkJobID}}/batch/{{bulkJobBatchID}}/result",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"async",
+								"38.0",
+								"job",
+								"{{bulkJobID}}",
+								"batch",
+								"{{bulkJobBatchID}}",
+								"result"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OAuth - Web Server Flow",
+			"description": "",
+			"item": [
+				{
+					"name": "2 - Receive Access Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://login.salesforce.com/services/oauth2/token?grant_type=authorization_code&client_id={{clientID}}&client_secret={{clientSecret}}&redirect_uri={{redirectURI}}&code={{authorizationCode}}",
+							"protocol": "https",
+							"host": [
+								"login",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"services",
+								"oauth2",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"equals": true
+								},
+								{
+									"key": "client_id",
+									"value": "{{clientID}}",
+									"equals": true
+								},
+								{
+									"key": "client_secret",
+									"value": "{{clientSecret}}",
+									"equals": true
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirectURI}}",
+									"equals": true
+								},
+								{
+									"key": "code",
+									"value": "{{authorizationCode}}",
+									"equals": true
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SOAP API",
+			"description": "",
+			"item": [
+				{
+					"name": "SOAP Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=UTF-8\""
+							},
+							{
+								"key": "SOAPAction",
+								"value": "login"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<env:Envelope xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\n    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n    xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <env:Body>\n    <n1:login xmlns:n1=\"urn:partner.soap.sforce.com\">\n      <n1:username>{{username}}</n1:username>\n      <n1:password>{{password}}{{token}}</n1:password>\n    </n1:login>\n  </env:Body>\n</env:Envelope>"
+						},
+						"url": {
+							"raw": "https://{{environment}}.salesforce.com/services/Soap/u/38.0",
+							"protocol": "https",
+							"host": [
+								"{{environment}}",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"services",
+								"Soap",
+								"u",
+								"38.0"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SObject",
+			"description": "",
+			"item": [
+				{
+					"name": "Create Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.clearEnvironmentVariable(\"accountID\");\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"accountID\", jsonData.id);\r",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"Test3\",\n  \"Type\": \"Prospect\",\n  \"ParentId\": null,\n  \"BillingStreet\": \"10 Main Rd.\",\n  \"BillingCity\": \"New York\",\n  \"BillingState\": \"NY\",\n  \"BillingPostalCode\": \"31349\",\n  \"BillingCountry\": \"USA\",\n  \"BillingLatitude\": null,\n  \"BillingLongitude\": null,\n  \"BillingGeocodeAccuracy\": null,\n  \"ShippingStreet\": \"10 Main Rd.\",\n  \"ShippingCity\": \"New York\",\n  \"ShippingState\": \"NY\",\n  \"ShippingPostalCode\": \"31349\",\n  \"ShippingCountry\": \"USA\",\n  \"ShippingLatitude\": null,\n  \"ShippingLongitude\": null,\n  \"ShippingGeocodeAccuracy\": null,\n  \"Phone\": \"(212) 555-5555\",\n  \"Fax\": \"(212) 555-5555\",\n  \"Website\": null,\n  \"Industry\": \"Manufacturing\",\n  \"AnnualRevenue\": 100000000,\n  \"NumberOfEmployees\": 680,\n  \"Description\": null,\n  \"Jigsaw\": null,\n  \"AccountSource\": null,\n  \"DunsNumber\": null,\n  \"Tradestyle\": null,\n  \"NaicsCode\": null,\n  \"NaicsDesc\": null,\n  \"YearStarted\": null,\n  \"SicDesc\": null,\n  \"DandbCompanyId\": null\n}"
+						},
+						"url": {
+							"raw": "{{pod}}/services/data/v36.0/sobjects/Account",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v36.0",
+								"sobjects",
+								"Account"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"Test5\",\n  \"Type\": \"Prospect\",\n  \"ParentId\": null,\n  \"BillingStreet\": \"10 Main Rd.\",\n  \"BillingCity\": \"New York\",\n  \"BillingState\": \"NY\",\n  \"BillingPostalCode\": \"31349\",\n  \"BillingCountry\": \"USA\",\n  \"BillingLatitude\": null,\n  \"BillingLongitude\": null,\n  \"BillingGeocodeAccuracy\": null,\n  \"ShippingStreet\": \"10 Main Rd.\",\n  \"ShippingCity\": \"New York\",\n  \"ShippingState\": \"NY\",\n  \"ShippingPostalCode\": \"31349\",\n  \"ShippingCountry\": \"USA\",\n  \"ShippingLatitude\": null,\n  \"ShippingLongitude\": null,\n  \"ShippingGeocodeAccuracy\": null,\n  \"Phone\": \"(212) 555-5555\",\n  \"Fax\": \"(212) 555-5555\",\n  \"Website\": null,\n  \"Industry\": \"Manufacturing\",\n  \"AnnualRevenue\": 100000000,\n  \"NumberOfEmployees\": 680,\n  \"Description\": null,\n  \"Jigsaw\": null,\n  \"AccountSource\": null,\n  \"DunsNumber\": null,\n  \"Tradestyle\": null,\n  \"NaicsCode\": null,\n  \"NaicsDesc\": null,\n  \"YearStarted\": null,\n  \"SicDesc\": null,\n  \"DandbCompanyId\": null\n}"
+						},
+						"url": {
+							"raw": "{{pod}}/services/data/v36.0/sobjects/Account/{{accountID}}",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v36.0",
+								"sobjects",
+								"Account",
+								"{{accountID}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"Test5\",\n  \"Type\": \"Prospect\",\n  \"ParentId\": null,\n  \"BillingStreet\": \"10 Main Rd.\",\n  \"BillingCity\": \"New York\",\n  \"BillingState\": \"NY\",\n  \"BillingPostalCode\": \"31349\",\n  \"BillingCountry\": \"USA\",\n  \"BillingLatitude\": null,\n  \"BillingLongitude\": null,\n  \"BillingGeocodeAccuracy\": null,\n  \"ShippingStreet\": \"10 Main Rd.\",\n  \"ShippingCity\": \"New York\",\n  \"ShippingState\": \"NY\",\n  \"ShippingPostalCode\": \"31349\",\n  \"ShippingCountry\": \"USA\",\n  \"ShippingLatitude\": null,\n  \"ShippingLongitude\": null,\n  \"ShippingGeocodeAccuracy\": null,\n  \"Phone\": \"(212) 555-5555\",\n  \"Fax\": \"(212) 555-5555\",\n  \"Website\": null,\n  \"Industry\": \"Manufacturing\",\n  \"AnnualRevenue\": 100000000,\n  \"NumberOfEmployees\": 680,\n  \"Description\": null,\n  \"Jigsaw\": null,\n  \"AccountSource\": null,\n  \"DunsNumber\": null,\n  \"Tradestyle\": null,\n  \"NaicsCode\": null,\n  \"NaicsDesc\": null,\n  \"YearStarted\": null,\n  \"SicDesc\": null,\n  \"DandbCompanyId\": null\n}"
+						},
+						"url": {
+							"raw": "{{pod}}/services/data/v36.0/sobjects/Account/{{accountID}}",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v36.0",
+								"sobjects",
+								"Account",
+								"{{accountID}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Note",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"Test5\",\n  \"Type\": \"Prospect\",\n  \"ParentId\": null,\n  \"BillingStreet\": \"10 Main Rd.\",\n  \"BillingCity\": \"New York\",\n  \"BillingState\": \"NY\",\n  \"BillingPostalCode\": \"31349\",\n  \"BillingCountry\": \"USA\",\n  \"BillingLatitude\": null,\n  \"BillingLongitude\": null,\n  \"BillingGeocodeAccuracy\": null,\n  \"ShippingStreet\": \"10 Main Rd.\",\n  \"ShippingCity\": \"New York\",\n  \"ShippingState\": \"NY\",\n  \"ShippingPostalCode\": \"31349\",\n  \"ShippingCountry\": \"USA\",\n  \"ShippingLatitude\": null,\n  \"ShippingLongitude\": null,\n  \"ShippingGeocodeAccuracy\": null,\n  \"Phone\": \"(212) 555-5555\",\n  \"Fax\": \"(212) 555-5555\",\n  \"Website\": null,\n  \"Industry\": \"Manufacturing\",\n  \"AnnualRevenue\": 100000000,\n  \"NumberOfEmployees\": 680,\n  \"Description\": null,\n  \"Jigsaw\": null,\n  \"AccountSource\": null,\n  \"DunsNumber\": null,\n  \"Tradestyle\": null,\n  \"NaicsCode\": null,\n  \"NaicsDesc\": null,\n  \"YearStarted\": null,\n  \"SicDesc\": null,\n  \"DandbCompanyId\": null\n}"
+						},
+						"url": {
+							"raw": "{{pod}}/services/data/v36.0/sobjects/Note/{{noteID}}",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v36.0",
+								"sobjects",
+								"Note",
+								"{{noteID}}"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "POST Note",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"noteID\", jsonData.id);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ParentId\": \"001R000001EaHLSIA3\",\n  \"Title\": \"Note Title\",\n  \"IsPrivate\": false,\n  \"Body\": \"Note Body\"\n}"
+						},
+						"url": {
+							"raw": "{{pod}}/services/data/v36.0/sobjects/Note/",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v36.0",
+								"sobjects",
+								"Note",
+								""
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tooling API",
+			"description": "",
+			"item": [
+				{
+					"name": "GET Log",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"programID\", jsonData.result[0].programID);\r",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n      \"timeZone\": \"(GMT-7) Mountain Standard Time (America/Denver)\",\n      \"suffix\": null,\n      \"street\": \"street\",\n      \"state\": \"state\",\n      \"ssnTaxID\": \"5554443333\",\n      \"salutation\": null,\n      \"residency\": \"US Citizen\",\n      \"primarySchoolStudentID\": \"studentid\",\n      \"primarySchoolID\": null,\n      \"primarySchoolGraduationDate\": \"2017-12-31\",\n      \"primarySchoolGradeLevel\": \"Freshman\",\n      \"primarySchoolEnrollmentStatus\": \"Full Time\",\n      \"primarySchoolEmail\": \"schoolemail@email.com\",\n      \"preferredMethodOfCommunication\": \"Call\",\n      \"postalCode\": \"zip\",\n      \"personAccountID\": \"001R000001D5xmSIAR\",\n      \"mobilePhone\": \"(555) 555-5555\",\n      \"middleName\": null,\n      \"lastName\": \"student123a\",\n      \"homePhone\": null,\n      \"guid\": \"001R000001D5xmS\",\n      \"firstName\": \"test1\",\n      \"email\": \"greg@cloudpremise.com\",\n      \"driversLicenseOrStateID\": \"driverslice\",\n      \"doNotText\": true,\n      \"doNotEmail\": false,\n      \"doNotCall\": false,\n      \"country\": \"usa\",\n      \"city\": \"city\",\n      \"birthdate\": null,\n      \"authSystemUserID\": \"123a\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{pod}}/services/data/v39.0/tooling/sobjects/ApexLog/07L0S000000cEKaUAM/Body",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"data",
+								"v39.0",
+								"tooling",
+								"sobjects",
+								"ApexLog",
+								"07L0S000000cEKaUAM",
+								"Body"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Streaming API",
+			"description": "",
+			"item": [
+				{
+					"name": "Create Generic Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"pushEvents\":[{\"payload\":\"payloadText\"}]\r\n}"
+						},
+						"url": {
+							"raw": "{{pod}}/services/async/38.0/sobjects/StreamingChannel/{{streamingChannelID}}/push",
+							"host": [
+								"{{pod}}"
+							],
+							"path": [
+								"services",
+								"async",
+								"38.0",
+								"sobjects",
+								"StreamingChannel",
+								"{{streamingChannelID}}",
+								"push"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Query",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{pod}}/services/data/v36.0/query?q={{query}}",
+					"host": [
+						"{{pod}}"
+					],
+					"path": [
+						"services",
+						"data",
+						"v36.0",
+						"query"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "{{query}}",
+							"equals": true
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "78b2c994-1adb-438c-a03b-427f1e967fcd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "28b03881-710e-47a4-a707-a4bf288e01d8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
