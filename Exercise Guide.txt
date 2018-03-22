@@ -36,6 +36,7 @@ Selected Action = Outbound Message: Notify Actors Union
 
 6. Save --> Done --> Activate
 7. Add an Actor from Movie Magic Application --> Actor
+8. Return to the web proxy endpoint and observe the outbound message (e.g. https://putsreq.com/2Kvm4TFVRH9wJGngThg7/inspect)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Outbound Callout Exercise
