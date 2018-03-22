@@ -76,14 +76,14 @@ global with sharing class Api  {
         }
         if(theatersToCreate.size()>0){
             System.debug(theatersToCreate);
-            insert theatersToCreate;
+            Database.insert(theatersToCreate,false);
             // for(Theater__c theater : theatersToCreate){
             //     theatersByName.put(theather.Name, theater);
             // }
         }
         if(moviesToCreate.size()>0){
             System.debug(moviesToCreate);
-            insert moviesToCreate;
+            Database.insert(moviesToCreate,false);
             // for(Movie__c movie : moviesToCreate){
             //     moviesByName.put(movie.Name, movie);
             // }            
@@ -94,11 +94,13 @@ global with sharing class Api  {
                 System.debug(bor.Movie__r);
                 System.debug(bor.Theater__r);
                    bor.Movie__c = bor.Movie__r.id;
+                   bor.Movie__r = null;
                    bor.Theater__c = bor.Theater__r.id;
+                   bor.Theater__r = null;
             System.debug(bor);
                        }
             System.debug(boxOfficeResultsToCreate);
-            insert boxOfficeResultsToCreate;
+            Database.insert(boxOfficeResultsToCreate,true);
         }
         System.debug(bors);
         String res = 'Box Office Result Created';
