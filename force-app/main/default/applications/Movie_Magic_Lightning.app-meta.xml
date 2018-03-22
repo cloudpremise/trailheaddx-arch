@@ -4,5 +4,6 @@
     <label>Movie Magic Lightning</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
+    <tabs>Movie__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
