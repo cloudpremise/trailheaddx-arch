@@ -95,5 +95,61 @@ Instance URL =
 Access Token = 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-OAuth Exercise
+Authorization Provider Exercise
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+1. Navigate to https://developers.facebook.com/
+2. Add a New App
+
+Display Name = TrailheadDX
+
+3. Click Create App ID
+4. Enter CAPTCHA info
+5. Copy Information for Salesforce
+Settings --> Basic
+Copy Information for Salesforce
+
+App ID = 
+App Secret = 
+
+6. Add Platform --> Website
+
+New Tab to Salesforce Org
+1. Setup --> Auth. Providers
+2. New --> Facebook
+
+Name = Facebook
+URL Suffix = Facebook
+Consumer Key = <App ID from Facebook>
+Consumer Secret = <App Secret from Facebook>
+User Info Endpoint URL = https://graph.facebook.com/me?fields=name,first_name,last_name,id,email
+Registration Handler = TrailheadDXFacebookRegHandler
+Execute Registration As = <your user id>
+
+3. Copy Information Required for Facebook
+
+Callback URL = 
+
+In Facebook Developer App
+1. Enter Site URL
+
+Site URL = <Callback URL from Salesforce>
+
+2. Save Changes
+3. From Dashoard --> Products --> Facebook Login --> Settings
+
+Valid OAuth Redirect URIs = <Callback URL from Salesforce>
+
+4. Save Changes
+
+In Salesforce
+1. Setup --> My Domain --> Authentication Configuration --> Edit
+
+Facebook = Checked
+
+2. Copy My Domain URL
+
+My Domain URL = https://app-drive-2416.cs10.my.salesforce.com/
+
+From New Browser (Therefore not logged into facebook or salesforce)
+1. Navigate to My Domain URL
+2. Click

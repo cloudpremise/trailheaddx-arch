@@ -11,4 +11,5 @@ node_modules
 selenium-client-jars/
 test/artifacts
 force-app/main/default/samlssoconfigs/
-
+force-app/main/default/authproviders/
+force-app/main/default/classes/AutocreatedRegHandler*
