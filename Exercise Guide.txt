@@ -31,7 +31,7 @@ Outbound Message Exercise
 1. Obtain a new endpoint by going to https://putsreq.com --> Create a PutsReq (others to try: http://httpresponder.com/)
 
 In Salesforce (new tab)
-1. Create an Outbound Message Setup --> Workflow --> Outbound Message --> New Outbound Message
+1. Create (or observe the existing) an Outbound Message Setup --> Workflow --> Outbound Message --> New Outbound Message
 
 Object = Actor
 Name = Notify Actors Union
