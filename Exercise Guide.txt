@@ -10,7 +10,7 @@ Apex Rest Exercise
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 1. Download and Install Postman
 2. Install the Postman Collection Located at: https://www.getpostman.com/collections/c4e35e11b2f8ae31fb82
-3. Obtain the Consu Setup --> App Manager --> API Demo --> View
+3. Obtain the OAuth Information for the api calls at Setup --> App Manager --> API Demo --> View
 
 Consumer Key = 
 Consumer Secret = 
