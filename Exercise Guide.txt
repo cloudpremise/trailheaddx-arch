@@ -1,0 +1,99 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Org Variables
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+org username =
+org password =
+org token =
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+SAML Exercise
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+1. Navigate to https://axiomsso.herokuapp.com/Home.action
+2. Click "SAML Identity Provider & Tester"
+3. Click "Configure" to download the x509 certificate.  Remember where you saved the file.
+
+In Salesforce:
+1. Enable SSO Under Setup --> Single Sign On Settings
+2. SAML Enabled = Checked
+3. Click "New" on SAML Single Sign-On Settings
+
+Name = Axiom
+API Name = Axiom
+Issuer = https://axiomsso.herokuapp.com
+Entity ID = https://saml.salesforce.com
+Identity Provider Certificate = <Upload the x509 certificate previously downloaded>
+SAML Identity Type = Assersion contains the Federation ID from the User Object
+SAML Identity Location = Identity is in the NameIdentifier element of the Subject statement
+
+4. Save
+5. Copy the Login URL
+
+Login URL = 
+
+In Axiom:
+1. Click "Generate"
+
+SAML Version=2.0
+Username = thdx_fed_id
+Issuer = https://axiomsso.herokuapp.com
+Recipient URL = <Enter the Login URL copied from Salesforce>
+Entity ID = https://saml.salesforce.com
+Start URL / Relay State = <Enter a Salesforce URL to redirect to after the SSO flow is complete>
+
+2. Click "Request SAML Response"
+
+In Salesforce
+1. Add the federation ID to the user id under Setup --> Users --> <your user id> --> Federation ID
+
+Federation ID = thdx_fed_id
+
+2. Logout of Salesforce
+
+In Axiom
+1. Click "Login"
+2. You should be logged into Salesforce automatically
+3. If you want to retry, go back in your browswer to the Axiom screen that says "Request SAML Response" to generate a new SAML response
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+OAuth Exercise
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+In Salesforce
+1. Navigate to App Manager (Lightning Experience) --> View
+2. Copy the Consumer Key
+3. Copy the Consumer Secret
+
+OAuth Demo Consumer Key = 
+OAuth Demo Consumer Secret = 
+
+New Browser Tab
+1. Navigate to https://axiomsso.herokuapp.com/Home.action
+2. Click "OAuth Tester"
+3. Click "OAuth 2.0"
+
+Host = test.salesforce.com (if you are using sandbox or scratch org, otherwise it would be login.salesforce.com)
+Consumer Key = <Consumer Key from Salesforce>
+
+4. Copy Redirect URI
+
+Redirect URI = 
+
+In Salesforce (Edit OAuth Demo Connected App)
+1. Callback URL = <Redirect URI from Axiom>
+2. Save
+
+In Axiom
+1. Click "Request Authorization Code" (This may take up to 10 minutes to work due to Salesforce internal propogation of Connected App information)
+2. OAuth Demo Authorization Screen Should appear.  Click "Allow"
+3. Screen Redirects to Axiom with Auth Code in URL
+
+Consumer Secret = <paste consumer secret from Salesforce>
+
+4. Click "Request Access Token"
+5. Note the information required for API Calls into Salesforce
+
+Instance URL = 
+Access Token = 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+OAuth Exercise
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

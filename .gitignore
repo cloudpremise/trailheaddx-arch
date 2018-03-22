@@ -10,4 +10,5 @@ node_modules
 .settings
 selenium-client-jars/
 test/artifacts
+force-app/main/default/samlssoconfigs/
 

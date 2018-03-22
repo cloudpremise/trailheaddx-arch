@@ -3,7 +3,7 @@
     <contactEmail>greg@cloudpremise.com</contactEmail>
     <label>OAuth Demo</label>
     <oauthConfig>
-        <callbackUrl>oauth://changetovaluespecifiedinaxiom</callbackUrl>
+        <callbackUrl>https://axiomsso.herokuapp.com/OAuth2HandleAuthCode.action</callbackUrl>
         <scopes>Full</scopes>
     </oauthConfig>
 </ConnectedApp>
