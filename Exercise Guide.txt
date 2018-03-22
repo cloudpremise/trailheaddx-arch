@@ -41,7 +41,16 @@ Selected Action = Outbound Message: Notify Actors Union
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Outbound Callout Exercise
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+1. Obtain a new endpoint by going to https://putsreq.com --> Create a PutsReq (others to try: http://httpresponder.com/)
 
+In Salesforce (new tab)
+1. Update the Named Credential URL with the correct endpoint (e.g. https://putsreq.com/2Kvm4TFVRH9wJGngThg7)
+2. Create a time card record
+3. Return to the web proxy endpoint and observe the callout (e.g. https://putsreq.com/2Kvm4TFVRH9wJGngThg7/inspect)
+4. Return to Salesforce and look through the solution
+
+- What are the issues with the trigger?
+- What are the issues with the TimeCardService?
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Apex Rest Exercise
