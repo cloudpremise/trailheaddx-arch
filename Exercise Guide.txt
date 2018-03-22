@@ -6,6 +6,30 @@ org password =
 org token =
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Apex Rest Exercise
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+1. Download and Install Postman
+2. Install the Postman Collection Located at: https://www.getpostman.com/collections/c4e35e11b2f8ae31fb82
+3. Obtain the Consu Setup --> App Manager --> API Demo --> View
+
+Consumer Key = 
+Consumer Secret = 
+
+4. Import the Postman Environment located within the git repository
+5. Set the variables in the postman THDX Environment
+
+clientID = <Salesforce Consumer Key>
+clientSecret = <Salesforce Consumer Secret>
+username = <salesforce user name>
+password = <salesforce user password>
+token = <salsforce token>
+environment = test (if using scratch or sandbox, otherwise value would be login)
+
+6. Exercise the OAuth Login (User/Password Flow)
+7. Exercise the Create Box Office Results (POST) API call
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 SAML Exercise
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 1. Navigate to https://axiomsso.herokuapp.com/Home.action
