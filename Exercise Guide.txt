@@ -152,4 +152,4 @@ My Domain URL = https://app-drive-2416.cs10.my.salesforce.com/
 
 From New Browser (Therefore not logged into facebook or salesforce)
 1. Navigate to My Domain URL
-2. Click
+2. Click "Facebook"

@@ -1,11 +1,10 @@
 {
-    "orgName": "Vemo Enterprise Scratch Org",
+    "orgName": "TrailheadDX Enterprise Scratch Org",
     "edition": "Enterprise",
     "orgPreferences" : {
         "enabled": ["S1DesktopEnabled","IsQuoteEnabled"]
     },
-    "features": ["PersonAccounts",
-                 "ExternalSharing",
+    "features": ["ExternalSharing",
                  "DebugApex",
                  "CustomTabs",
                  "CustomApps",
