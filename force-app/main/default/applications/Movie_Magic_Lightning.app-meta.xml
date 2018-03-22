@@ -8,5 +8,6 @@
     <tabs>Movie__c</tabs>
     <tabs>Theater__c</tabs>
     <tabs>Box_Office_Result__c</tabs>
+    <tabs>Time_Card__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

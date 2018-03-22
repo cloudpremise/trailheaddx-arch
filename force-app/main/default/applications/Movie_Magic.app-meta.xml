@@ -3,4 +3,8 @@
     <defaultLandingTab>standard-home</defaultLandingTab>
     <label>Movie Magic</label>
     <tabs>Movie__c</tabs>
+    <tabs>Actor__c</tabs>
+    <tabs>Theater__c</tabs>
+    <tabs>Box_Office_Result__c</tabs>
+    <tabs>Time_Card__c</tabs>
 </CustomApplication>

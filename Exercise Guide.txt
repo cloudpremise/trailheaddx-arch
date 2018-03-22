@@ -6,6 +6,26 @@ org password =
 org token =
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Creating the TrailheadDX Architect Org
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+1.	Install SFDX CLI
+2.	Install GIT
+3.	Install Visual Studio Code
+4.	Git Clone the repo at https://github.com/cloudpremise/trailheaddx-arch
+    $ git clone https://github.com/cloudpremise/trailheaddx-arch
+5.	Open the trailheaddx-arch folder from VS Code
+6.	Link your project to a devhub
+    $ sfdx force:auth:web:login --setdefaultdevhubusername --setalias devhuborg
+7.	Create a default scratch org
+8.	sfdx force:org:create -f config\project-scratch-ent.json --setalias thdx1 --setdefaultusername
+9.	Push Code to org
+    $ sfdx force:source:push --forceoverwrite
+10.	Assign Permission Set to User
+    $ sfdx force:user:permset:assign -n TrailheadDX
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Outbound Message Exercise
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 1. Obtain a new endpoint by going to https://putsreq.com --> Create a PutsReq (others to try: http://httpresponder.com/)
